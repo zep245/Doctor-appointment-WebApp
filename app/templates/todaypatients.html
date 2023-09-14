@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="grid h-60 px-4  bg-white place-content-center">
+    <div class="overflow-x-auto">
+        <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+        <thead class="ltr:text-left rtl:text-right">
+            <tr>
+            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                Name
+            </th>
+            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                Email
+            </th>
+            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                Phone number
+            </th>
+            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                date
+            </th>
+            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                Time
+            </th>
+            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                Token
+            </th>
+            </tr>
+        </thead>
+        
+
+        {% if morningappointments %}
+            {% for morningappointment in morningappointments %}
+            <tbody class="divide-y divide-gray-200">
+                <tr class="odd:bg-gray-50">
+                <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                    {{morningappointment.name}}
+                </td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{morningappointment.email}}</td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{morningappointment.phone_number}}</td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{morningappointment.date}}</td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{morningappointment.time}}</td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{morningappointment.token}}</td>
+                </tr>
+            </tbody>
+            {%endfor %}
+        {% else %}
+            <tbody class="divide-y divide-gray-200">
+                <tr class="odd:bg-gray-50">
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700">-</td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700">-<td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700">-</td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700">-</td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700">-</td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700">-</td>
+                </tr>
+            </tbody>
+        {% endif %}
+        </table>
+    </div>
+</div>
+
+
+<div class="grid h-60 px-4  bg-white place-content-center">
+    <div class="overflow-x-auto">
+        <table class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm">
+        <thead class="ltr:text-left rtl:text-right">
+            <tr>
+            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                Name
+            </th>
+            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                Email
+            </th>
+            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                Phone number
+            </th>
+            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                date
+            </th>
+            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                Time
+            </th>
+            <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                Token
+            </th>
+            </tr>
+        </thead>
+        
+        {% if eveningappointments %}
+            {% for eveningappointment in eveningappointments %}
+            <tbody class="divide-y divide-gray-200">
+                <tr class="odd:bg-gray-50">
+                <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
+                    {{eveningappointment.name}}
+                </td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{eveningappointment.email}}</td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{eveningappointment.phone_number}}</td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{eveningappointment.date}}</td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{eveningappointment.time}}</td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700">{{eveningappointment.token}}</td>
+                </tr>
+            </tbody>
+            {%endfor %}
+
+        {% else %}
+            <tbody class="divide-y divide-gray-200">
+                <tr class="odd:bg-gray-50">
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700">-</td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700">-<td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700">-</td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700">-</td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700">-</td>
+                <td class="whitespace-nowrap px-4 py-2 text-gray-700">-</td>
+                </tr>
+            </tbody>
+        {% endif %}
+        </table>
+    </div>
+</div>
+{% endblock %}

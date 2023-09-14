@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="grid h-screen px-4  bg-white place-content-center">
+    <h1 class="tracking-widest text-gray-500 uppercase">You Have Been Logged Out!</h1>
+    <p class="text-center text-sm text-gray-500">Login again?
+        <a class="underline" href="{% url 'login' %}">Sign in</a>
+    </p>
+</div>
+{% endblock %}

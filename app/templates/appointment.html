@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block content %}
+<div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-lg">
+      {% if messages %}
+        {% for message in messages %}
+            {% if 'error' in message.tags %}
+                <div class="rounded border-s-4 mb-1 border-red-500 bg-red-50 p-4">
+                    <strong class="block font-medium text-red-800"> Error </strong>
+                    <p class="mt-2 text-sm text-red-700">
+                        {{ message }}
+                    </p>
+                </div>
+            {% endif %}
+            {% if 'success' in message.tags %}
+                <div class="rounded border-s-4 mb-1 border-green-500 bg-emerald-50 p-4">
+                    <strong class="block font-medium text-green-800"> Successfully </strong>
+                    <p class="mt-2 text-sm text-green-700">
+                        {{ message }}
+                    </p>
+                </div>
+            {% endif %}
+        {% endfor %}
+      {% endif %}
+
+
+      <h1 class="text-center text-2xl font-bold text-black sm:text-3xl">Book Appointment</h1>
+  
+      <p class="mx-auto mt-4 max-w-md text-center text-gray-500">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati sunt
+        dolores deleniti inventore quaerat mollitia?
+      </p>
+  
+      <form method="post" action="" class="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8">
+        <p class="text-center text-lg font-medium">Appointment form</p>
+        {% csrf_token %}
+        <div>
+            <label for="name" class="sr-only">Name</label>
+  
+          <div class="relative">
+            <input type="text" type="text" name="name" class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm outline-blue-600" placeholder="Enter name">
+          </div>
+        </div>
+
+        <div>
+            <label for="email" class="sr-only">Email</label>
+    
+            <div class="relative">
+              <input type="text" type="email" name="email" class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm outline-blue-600" placeholder="Enter email">
+            </div>
+        </div>
+        
+        <div>
+            <label for="phonenumber" class="sr-only">Phone number</label>
+    
+            <div class="relative">
+              <input type="tel" name="phone_number" class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm outline-blue-600" placeholder="Enter phone number" maxlength="10">
+            </div>
+        </div>
+        <button type="submit" class="block w-full rounded-lg bg-black px-5 py-3 text-sm font-medium text-white">Book appointment</button>
+    </form>
+    </div>
+  </div>
+{% endblock %}
