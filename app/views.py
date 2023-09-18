@@ -65,22 +65,18 @@ def register(request):
 
 def login(request):
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
+        email_or_username = request.POST.get('emailorusername')  # Use get() to avoid KeyError
+        password = request.POST.get('password')
 
-        if not User.objects.filter(username=username).exists():
-            messages.error(request, 'Invalid username.' )
-            return redirect("login")
-        
+        if not email_or_username:
+            messages.error(request, 'Username or email is required.')
+            return redirect('login')
+
         if not password:
-            messages.error(request, 'Password is required.')  # Add a message for an empty password
+            messages.error(request, 'Password is required.')
             return redirect('login')
 
-        if not password[0].isupper():
-            messages.error(request, 'Remember to capitalize the first letter of the password.')
-            return redirect('login')
-
-        user = authenticate(request, username=username, password=password)
+        user = authenticate(request, username=email_or_username, password=password)
 
         if user is not None:
             auth_login(request, user)
@@ -88,7 +84,8 @@ def login(request):
         else:
             messages.error(request, 'Invalid credentials')
 
-    return render(request, 'login.html' , {'title':'Login'})
+    return render(request, 'login.html', {'title': 'Login'})
+
 
 
 @login_required(login_url='login')

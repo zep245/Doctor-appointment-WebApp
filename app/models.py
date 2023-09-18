@@ -2,6 +2,7 @@ from django.db import models
 from datetime import date
 from django.contrib.auth.models import User
 from django.utils import timezone
+from django.core.exceptions import ValidationError
 
 
 
@@ -13,13 +14,15 @@ class Dates(models.Model):
         verbose_name_plural = "Date"
 
     def delete(self, *args, **kwargs):
-        if self.date < timezone.now().date():
-            super().delete()
+        delete_dates = self.dates
+        if delete_dates < timezone.now().date():
+            self.delete()
+        return delete_dates
 
 
     def save(self,*args , **kwargs):
         if self.date < timezone.now().date():
-            raise ValueError('You cannot add past dates')
+            raise ValidationError('You cannot add past dates')
         super().save(*args , **kwargs)
 
     def __str__(self):
@@ -31,8 +34,8 @@ class Appointment(models.Model):
     name = models.CharField(max_length=20)
     email = models.EmailField(unique=True)
     phone_number = models.CharField(max_length=10, default=None , unique=True)
-    date = models.DateField(blank=True)
-    time = models.TextField(blank=True)
+    date = models.DateField()
+    time = models.TextField()
     token = models.PositiveIntegerField()
 
     def __str__(self):
@@ -49,6 +52,10 @@ class Appointment(models.Model):
                 token = 1
             self.token = token
         super().save(*args, **kwargs)
+
+    def delete(self):
+        if self.date < timezone.now.date():
+            self.delete()
 
     @classmethod
     def MorningAppointments(cls):

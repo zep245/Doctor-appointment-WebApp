@@ -24,10 +24,10 @@
         <p class="text-center text-lg font-medium">Sign in to your account</p>
         {% csrf_token %}
         <div>
-          <label for="email" class="sr-only">Username</label>
+          <label for="email" class="sr-only">Username Or Email</label>
   
           <div class="relative">
-            <input type="username" name="username" class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm" placeholder="Enter username"/>
+            <input type="text" name="emailorusername" class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm" placeholder="Enter username or email"/>
           </div>
         </div>
   
