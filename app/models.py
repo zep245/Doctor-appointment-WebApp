@@ -2,8 +2,6 @@ from django.db import models
 from datetime import date
 from django.contrib.auth.models import User
 from django.utils import timezone
-from django.core.exceptions import ValidationError
-
 
 
 
@@ -22,7 +20,7 @@ class Dates(models.Model):
 
     def save(self,*args , **kwargs):
         if self.date < timezone.now().date():
-            raise ValidationError('You cannot add past dates')
+            raise ValueError("Date cannot be in the past.")
         super().save(*args , **kwargs)
 
     def __str__(self):

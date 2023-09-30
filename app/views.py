@@ -11,7 +11,6 @@ from django.conf import settings
 from .models import *
 from datetime import datetime
 from .decorators import *
-import time
 
 
 def home(request):
@@ -120,7 +119,7 @@ def create_appointment(request):
         phone_number = request.POST.get('phone_number')
         date_str = request.session.get('date')
         time = request.session.get('time')
-
+        
         date = datetime.fromisoformat(date_str)
 
         if Appointment.objects.filter(email=email).exists():
@@ -142,10 +141,7 @@ def create_appointment(request):
         send_mail(subject, message, from_email, recipient_list, fail_silently=False)
         del request.session['date']
         del request.session['time']
-        messages.success(request, 'Appointment created successfully.', extra_tags='success')
-        return redirect('appointment')
-        
-
+        messages.success(request, 'Appointment created successfully.', extra_tags='success')    
     return render(request, 'appointment.html' , {'time':'appointment' , 'title':'Appointment'})
 
 @login_required(login_url='login')
@@ -155,5 +151,4 @@ def patients(request):
     morningappointments = Appointment.MorningAppointments()
     eveningappointments = Appointment.EveningAppointments()
     return render(request , 'todaypatients.html' , {'morningappointments':morningappointments , 'eveningappointments':eveningappointments ,  'title':'Patient' } )
-
 
