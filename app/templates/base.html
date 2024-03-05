@@ -50,7 +50,7 @@
       
             <div class="flex items-center gap-4">
               <div class="sm:flex sm:gap-4">
-                {% if user.is_authenticated %}
+                {% if request.session.patient %}
                    <a class="rounded-md bg-slate-900 px-5 py-2.5 text-sm font-medium text-white shadow hover:bg-slate-700" href="{% url 'logout' %}">Logout</a>
                 {% else%}
               </div>

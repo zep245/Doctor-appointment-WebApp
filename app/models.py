@@ -1,8 +1,29 @@
 from django.db import models
 from datetime import date
-from django.contrib.auth.models import User
 from django.utils import timezone
+from django.contrib.auth.hashers import make_password
 
+
+class Patients(models.Model):
+    email = models.EmailField(unique=True , blank=False)
+    password = models.CharField(max_length=20)
+
+    class Meta:
+        verbose_name_plural = "Patients"
+
+    @classmethod
+    def get_Patients_by_email(cls, email):
+        try:
+            return cls.objects.get(email=email)
+        except cls.DoesNotExist:
+            return None
+
+    def set_password(self, raw_password):
+        self.password = make_password(raw_password)
+
+
+    def __str__(self):
+        return self.email
 
 
 class Dates(models.Model):
@@ -28,7 +49,7 @@ class Dates(models.Model):
 
 
 class Appointment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
+    user = models.ForeignKey(Patients, on_delete=models.CASCADE, default=None)
     name = models.CharField(max_length=20)
     email = models.EmailField(unique=True)
     phone_number = models.CharField(max_length=10, default=None , unique=True)
@@ -62,3 +83,6 @@ class Appointment(models.Model):
     @classmethod
     def EveningAppointments(cls):
         return cls.objects.filter(date=date.today(), time='4:00 PM')
+
+
+
